@@ -1,5 +1,38 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div.chat__sidebar
+    h3 People
+    div#users
+  div.chat__main
+    ol#messages.chat__messages
+    div.chat__footer
+      form#message-form
+        input(type='text' name='message' placeholder='Message' autofocus autocomplete='off')
+        button Send
+      button#send-location Send location
+
+  script#message-template(type='text/template')
+    li.message
+      .message__title
+        h4 {{from}}
+        span {{createdAt}}
+      .message__body
+        p {{text}}
+
+  script#location-message-template(type='text/template')
+    li.message
+      .message__title
+        h4 {{from}}
+        span {{createdAt}}
+      .message__body
+        p
+          a(href='{{url}}' target='_blank') My current location
+
+  script(src='socket.io/socket.io.js')
+  script(src='javascripts/libs/jquery-3.2.1.min.js')
+  script(src='javascripts/libs/moment.js')
+  script(src='javascripts/libs/mustache.js')
+  script(src='javascripts/index.js')
+  //h1= title
+  //p Welcome to #{title}
